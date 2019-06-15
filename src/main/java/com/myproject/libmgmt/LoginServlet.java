@@ -1,6 +1,7 @@
 package com.myproject.libmgmt;
 
 import com.myproject.libmgmt.db.StudentDBService;
+import com.myproject.libmgmt.model.Student;
 
 import java.io.IOException;
 import java.sql.ResultSet;
@@ -13,22 +14,24 @@ public class LoginServlet extends HttpServlet {
 
     StudentDBService dbService = new StudentDBService();
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             String userName = request.getParameter("username");
             String password = request.getParameter("password");
-            ResultSet resultSet = dbService.selectStudentByUserName(userName);
-            if (resultSet == null) {
+
+            System.out.println("Input UserName:"+userName);
+            System.out.println("Input Password:"+password);
+
+            Student student = dbService.selectStudentByUserName(userName);
+            if (student == null) {
                 response.setStatus(404);
                 response.setContentType("text/html");
                 response.getWriter().println("<h1>User not found</h1>");
 
             } else {
-                resultSet.next();
-                String userNameInDB = resultSet.getString("USERNAME");
-                String passwordInDB = resultSet.getString("PASSWORD");
+                System.out.println(student.toString());
 
-                if (userNameInDB == userName.trim() && passwordInDB == password.trim()) {
+                if (student.userName.equals(userName) && student.password.equals(password)) {
                     response.setStatus(HttpServletResponse.SC_OK);
                     response.setContentType("text/html");
                     response.getWriter().println("Login Successfull");

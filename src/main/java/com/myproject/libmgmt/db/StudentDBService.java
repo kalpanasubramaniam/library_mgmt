@@ -1,4 +1,6 @@
 package com.myproject.libmgmt.db;
+import com.myproject.libmgmt.model.Student;
+
 import java.sql.*;
 
 // EXAMPLES:
@@ -69,11 +71,12 @@ public class StudentDBService {
       return rs;
   }
 
-    public ResultSet selectStudentByUserName(String userName){
+    public Student selectStudentByUserName(String userName){
 
         Connection c = null;
         Statement stmt = null;
         ResultSet rs = null;
+        Student student = null;
 
         try {
             Class.forName("org.sqlite.JDBC");
@@ -87,6 +90,17 @@ public class StudentDBService {
             System.out.println("SQL QUERY:"+sql);
 
             rs  = stmt.executeQuery(sql);
+
+            if(rs.next()){
+                student = new Student();
+                student.rollNo = rs.getInt("ROLLNO");
+                student.firstName = rs.getString("FIRSTNAME");
+                student.lastName = rs.getString("LASTNAME");
+                student.userName = rs.getString("USERNAME");
+                student.password= rs.getString("PASSWORD");
+                student.email = rs.getString("EMAIL");
+            }
+
             stmt.close();
             c.close();
         } catch ( Exception e ) {
@@ -95,7 +109,8 @@ public class StudentDBService {
 
         }
 
-        return rs;
+
+        return student;
     }
 
   public void insertStudent(String firstName, String lastName, int rollNo, String userName, String password, String emailId){
@@ -116,9 +131,8 @@ public class StudentDBService {
 
          System.out.println("SQL:"+sql);
 
-         stmt.executeUpdate(sql);
+         stmt.execute(sql);
          
-         rs  = stmt.executeQuery(sql);
          stmt.close();
          c.commit();
          c.close();
