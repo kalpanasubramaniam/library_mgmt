@@ -35,6 +35,17 @@
     <url-pattern>/registration/*</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>Book</servlet-name>
+    <servlet-class>com.myproject.libmgmt.BookServlet</servlet-class>
+  </servlet>    
+
+ 
+  <servlet-mapping>
+    <servlet-name>Book</servlet-name>
+    <url-pattern>/book/*</url-pattern>
+  </servlet-mapping>  
+
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>

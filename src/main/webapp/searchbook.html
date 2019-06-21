@@ -1,28 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>student Registration</title>
+	<title>Insert Book</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <script src="jquery.min.js"></script>
     <script type="text/javascript">
-    	$(function() {
+        $(function() {
 	    	$(".button").click(function(event) {
 			event.preventDefault();// Stop the browser from submitting the form.	    		
-    		var form = $('#registration');
+    		var form = $('#selectbook');
     		var formData = $(form).serialize();
-    		console.log("Registration Data",formData);
+    		console.log("Selectbook Data",formData);
 
     		$.ajax({
-  		  		type: 'POST',
+  		  		type: 'GET',
     			url: '/'+ $(form).attr('action'),
     			data: formData,
 			}).done(function(response) {
 				console.log("success response:", response);
-				$("#registration_success").show();
-				$('#registration_form').toggle();
+				$("#selectbook_success").show();
+				$('#selectbook_form').toggle();
 				
 			}).fail(function(data,err) {
 				console.log("failure data", data, err);
@@ -32,9 +32,7 @@
 	    });
 
 </script>
-
 </head>
-
 
 <body background="C:\Users\elcot\Downloads\alejandro-sotillet-1546832-unsplash.jpg">
 
@@ -54,39 +52,35 @@
 	</nav>    
 	
 </header>
-
-
-<section>
-	<div class="reg_img">
+   <div class="reg_img">
 		<div class="box2">
 			<h1 style="text-align: center;font-size: 35px;font-family: lucida console;">Library Management System</h1><br>
 			
-			<div id="registration_success" style="text-align: center;font-size: 35px;font-family: lucida console; display: none;">
-				<h1 style="color: green">Registation done successfully. Please click here to login</h1><br>			
-				<a href="./student.html">Login</a>
+			<div id="selectbook_success" style="text-align: center;font-size: 35px;font-family: lucida console; display: none;">
+				<h1 style="color: green">SelectBook done successfully. Please click here to login</h1><br>			
+				<a href="./book.html">Login</a>
 			</div>
-			<div id="registration_form">
-				<form name="Registration" id="registration" action="registration" method="">
-					<h1 style="text-align: center;font-size: 25px;">User Registration Form</h1><br>
+			<div id="selectbook_form">
+				<form name="Selectbook" id="selectbook" action="book" method="">
+					<h1 style="text-align: center;font-size: 25px;">SelectBook </h1><br>
 					<br><br>
 					<div >
 
 					</div>
 					<div class="login">
-					<center><input type="text" name="firstname" placeholder="First Name" required=""><br><br></center>
-					<center><input type="text" name="lastname" placeholder="Last Name" required=""><br><br></center>	
-					<center><input type="text" name="username" placeholder="username" required=""><br><br></center>
-					<center><input type="password" name="password" placeholder="password" required=""><br><br></center>
-					<center><input type="roll" name="rollno" placeholder="Roll No" required="" ><br><br></center>
-					<center><input type="text" name="emailid" placeholder="Email" required=""><br><br></center>
-					<center> <input type="submit" style="width: 80px;" name="submit" class="button" id="submit_btn" value="Sign Up" /> </center>
+					<center><input type="text" name="bookid" placeholder="BookId" required=""><br><br></center>
+				    <center> <input type="submit" style="width: 80px;" name="submit" class="button" id="submit_btn" value="select book" /> </center>
 				</form>
 			</div>
 		</div>
 	</div>
-
 	<footer>
 		
 	</footer>
 </section>
 </html>
+
+
+
+
+	  
