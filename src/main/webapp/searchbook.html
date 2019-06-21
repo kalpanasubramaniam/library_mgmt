@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Insert Book</title>
+	<title>Search Book</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -49,16 +49,15 @@
 		<li><a href="registration.html">REGISTRATION</a></li>
 		<li><a href="">FEEDBACK</a></li>
 	    </ul> 
-	</nav>    
-	
+	</nav> 
 </header>
    <div class="reg_img">
 		<div class="box2">
 			<h1 style="text-align: center;font-size: 35px;font-family: lucida console;">Library Management System</h1><br>
 			
 			<div id="selectbook_success" style="text-align: center;font-size: 35px;font-family: lucida console; display: none;">
-				<h1 style="color: green">SelectBook done successfully. Please click here to login</h1><br>			
-				<a href="./book.html">Login</a>
+				<h1 style="color: green">SelectBook done successfully</h1><br>			
+				
 			</div>
 			<div id="selectbook_form">
 				<form name="Selectbook" id="selectbook" action="book" method="">
@@ -69,7 +68,8 @@
 					</div>
 					<div class="login">
 					<center><input type="text" name="bookid" placeholder="BookId" required=""><br><br></center>
-				    <center> <input type="submit" style="width: 80px;" name="submit" class="button" id="submit_btn" value="select book" /> </center>
+					<center><input type="text" name="bookname" placeholder="BookName" required=""><br><br></center>
+				    <center> <input type="submit" style="width: 80px;" name="submit" class="button" id="submit_btn" value="select book" /><br><br></center>
 				</form>
 			</div>
 		</div>
