@@ -54,10 +54,10 @@ public class BookServlet extends HttpServlet {
 
         int bookId = Integer.parseInt(request.getParameter("bookid"));
         String authorName = request.getParameter("authorname");
-        int price = Integer.parseInt(request.getParameter("price"));
-        String bookName = request.getParameter("bookname");
-        String department = request.getParameter("department");
-        String bookTitle = request.getParameter("booktitle");
+//        int price = Integer.parseInt(request.getParameter("price"));
+//        String bookName = request.getParameter("bookname");
+//        String department = request.getParameter("department");
+//        String bookTitle = request.getParameter("booktitle");
 
         System.out.println("BookId:" + bookId);
         System.out.println("AuthorName :" + authorName);
