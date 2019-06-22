@@ -54,7 +54,7 @@ public class BookDBService {
        c.setAutoCommit(false);
          
          stmt = c.createStatement();
-         String sql = "SELECT * FROM BOOK WHERE BOOKID=+ BOOKID + ;";
+         String sql = "SELECT * FROM BOOK WHERE BOOKID=" + "'" + bookId + "'";
 
          System.out.println("SQL QUERY:"+sql);
          rs  = stmt.executeQuery(sql);
