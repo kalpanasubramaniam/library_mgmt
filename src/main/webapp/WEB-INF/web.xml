@@ -20,6 +20,11 @@
   </servlet>
 
   <servlet>
+    <servlet-name>AdminLogin</servlet-name>
+    <servlet-class>com.myproject.libmgmt.AdminLoginServlet</servlet-class>
+  </servlet>
+
+  <servlet>
     <servlet-name>Registration</servlet-name>
     <servlet-class>com.myproject.libmgmt.RegistrationServlet</servlet-class>
   </servlet>
@@ -28,6 +33,11 @@
   <servlet-mapping>
     <servlet-name>Login</servlet-name>
     <url-pattern>/login/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>AdminLogin</servlet-name>
+    <url-pattern>/adminlogin/*</url-pattern>
   </servlet-mapping>
 
   <servlet-mapping>
