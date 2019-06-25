@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>student Registration</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="jquery.min.js"></script>
+    <script type="text/javascript">
+    	$(function() {
+	    	$(".button").click(function(event) {
+			event.preventDefault();// Stop the browser from submitting the form.
+    		var form = $('#registration');
+    		var formData = $(form).serialize();
+    		console.log("Registration Data",formData);
+
+    		$.ajax({
+  		  		type: 'POST',
+    			url: '/'+ $(form).attr('action'),
+    			data: formData,
+			}).done(function(response) {
+				console.log("success response:", response);
+				$("#registration_success").show();
+				$('#registration_form').toggle();
+
+			}).fail(function(data,err) {
+				console.log("failure data", data, err);
+			});
+
+			});
+	    });
+
+</script>
+
+</head>
+
+
+<body background="C:\Users\elcot\Downloads\alejandro-sotillet-1546832-unsplash.jpg">
+
+</body>
+<header style="height: 100px;">
+    <div class="logo">
+        <h1 style="color:white;font-size: 25px;word-spacing:10px;line-height: 50px;margin-top: 20px;">LIBRARY MANAGEMENT SYSTEM</h1>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="books.html">BOOKS</a></li>
+            <li><a href="registration.html">STUDENT_REGISTRATION</a></li>
+            <li><a href="">FEEDBACK</a></li>
+        </ul>
+    </nav>
+
+</header>
+
+
+<section>
+    <div class="reg_img">
+        <div class="box2">
+            <h1 style="text-align: center;font-size: 35px;font-family: lucida console;">Library Management System</h1><br>
+
+            <div style="text-align: center;font-size: 35px;font-family: lucida console">
+                <a href="./stu_myaccount.html">MyAccount</a>
+            </div>
+            <div style="text-align: center;font-size: 35px;font-family: lucida console">
+                <a href="./stu_searchbook.html">SearchBook</a>
+            </div>
+            
+            <div style="text-align: center;font-size: 35px;font-family: lucida console">
+                <a href="./stu_issuebookreport.html">IssueBook Report</a>
+            </div>
+             <div style="text-align: center;font-size: 35px;font-family: lucida console">
+                <a href="./stu_penalityreport.html">Penality Report</a>
+            </div>
+ 
+        </div>
+    </div>
+
+    <footer>
+
+    </footer>
+</section>
+</html>

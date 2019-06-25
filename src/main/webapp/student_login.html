@@ -22,7 +22,7 @@
     			data: formData,
 			}).done(function(response) {
 				// window.location.href = data.redirect;
-				top.location.href="./books.html";
+				top.location.href="./student_home.html";
     			console.log(response);
 			}).fail(function(data,err) {
 				console.log("Failure message", data.responseText);
@@ -57,7 +57,7 @@
 	<div class="log_img">
 		<br><br><br>
 		<div class="box1">
-			<h1 style="text-align: center;font-size: 35px;font-family: lucida console;">Books</h1><br>
+			<h1 style="text-align: center;font-size: 35px;font-family: lucida console;"></h1><br>
 			<h1 style="text-align: center;font-size: 25px;">User Login Form</h1><br>
 			<form name="login" id = "login" action="login" method="post">
 				<br><br>
@@ -72,8 +72,14 @@
 				<center><button>Login</button></center>
 			</form>
 			<p style="color: white;padding-left: 15px;">
+			    <br><br>
+                <a style="color: white;" href="./stu_changepassword.html">Change password?</a>
+                       
+            </p>
+  
+			<p style="color: white;padding-left: 15px;">
 				<br><br>
-				<a style="color: white;" href="">Forgot password?</a>
+		
 				New to this website?<a style="color: white" href="registration.html">Sign Up</a>
 			</p>
 		</div>
