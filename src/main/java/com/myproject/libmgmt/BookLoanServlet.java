@@ -8,21 +8,32 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.*;
 
 public class BookLoanServlet extends HttpServlet {
 
     BookLoanDBService dbService = new BookLoanDBService();
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        System.out.println("InsertBook of the student");
+        System.out.println("IssueBook of the student");
 
         int bookId = Integer.parseInt(request.getParameter("bookid"));
         int rollNo = Integer.parseInt(request.getParameter("rollno"));
-        int issuedate = Integer.parseInt(request.getParameter("issuedate"));
-        int duedate = Integer.parseInt(request.getParameter("duedate"));
-        int returndate = Integer.parseInt(request.getParameter("returndate"));
-        
+          
+        Date currentDate=new Date();
+        Calendar c = Calendar.getInstance();
+        c.setTime(currentDate);
+        c.add(Calendar.DATE, 1);
+        Date  dueDate = c.getTime();
+        String issueDate = sdf.format(currentDate);
+        String returnDate = sdf.format(dueDate);
+
+        System.out.println(sdf.format(dueDate));
+
 
         System.out.println("BookId:" + bookId);
         System.out.println("RollNo :" + rollNo);
@@ -31,8 +42,8 @@ public class BookLoanServlet extends HttpServlet {
 
         try {
             if (rs == null || !rs.next()) {
-                System.out.println("Issue book record");
-                dbService.insertBookLoan(bookId, rollNo, issuedate, duedate, returndate);
+                System.out.println("already book issued");
+                dbService.insertBookLoan(bookId, rollNo,issueDate,returnDate);
                 response.setStatus(HttpServletResponse.SC_OK);
                 response.setContentType("text/html");
                 response.getWriter().println("IssuetBook done successfully");

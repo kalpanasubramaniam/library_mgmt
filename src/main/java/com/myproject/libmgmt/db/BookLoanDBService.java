@@ -19,11 +19,13 @@ public class BookLoanDBService {
 
          stmt = c.createStatement();
          String sql = "CREATE TABLE BOOKLOAN " +
-                        "(BOOKID              INT   PRIMARY KEY                    NOT NULL," +
-                        " ROLLNO         INT  PRIMARY KEY                     NOT NULL, " +
-                        " ISSUEDATE          INT                     NOT NULL, " +
-                        " DUEDATE           INT                 NOT NULL, " +
-                        " RETURNDATE           INT                NOT NULL) " ;
+                        "(BOOKID              INT               NOT     NULL," +
+                        " ROLLNO         INT                  NOT NULL, " +
+                        " ISSUEDATE          DATE                  NOT  NULL, " +
+                        " DUEDATE           DATE                NOT NULL, " +
+                        " RETURNDATE           DATE                 NULL," +
+                        " FINE           INT                 NULL," +
+                        " PRIMARY KEY(BOOKID, ROLLNO) )" ;
                         
 
          System.out.println("Create BOOKLOAN table sql:"+sql);               
@@ -70,9 +72,38 @@ public class BookLoanDBService {
   }
 
 
+  public void updateBookLoan(int bookid, int rollno, String returndate, int fine) {
+      Connection c = null;
+      Statement stmt = null;
+      ResultSet rs = null;
+      
+      try {
+         Class.forName("org.sqlite.JDBC");
+         c = DriverManager.getConnection("jdbc:sqlite:library_mgmt.db");
+         c.setAutoCommit(false);
+
+         stmt = c.createStatement();
+
+         String sql = "UPDATE BOOKLOAN SET "+ rollno + ",'"  +  returndate + "','" + fine + "'  WHERE "+ bookid +"";
+
+         System.out.println("SQL:"+sql);
+
+         stmt.execute(sql);
+         
+         stmt.close();
+         c.commit();
+         c.close();
+      } catch ( Exception e ) {
+          System.err.println("Error while update record in bookloan table");
+         System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+
+      }
+  
+  }
+
    
    
-  public void insertBookLoan(int bookid , int rollno, int issuedate, int duedate, int returndate){
+  public void insertBookLoan(int bookid , int rollno, String issuedate, String duedate){
 
       Connection c = null;
       Statement stmt = null;
@@ -85,8 +116,8 @@ public class BookLoanDBService {
 
          stmt = c.createStatement();
 
-         String sql = "INSERT INTO BOOKLOAN (BOOKID,ROLLNO,ISSUEDATE,DUEDATE,RETURNDATE) VALUES" +
-          "("+ bookid + ",'"  +  rollno + "'," + issuedate + ",'" +duedate + "','" + returndate + "')";
+         String sql = "INSERT INTO BOOKLOAN (BOOKID,ROLLNO,ISSUEDATE,DUEDATE) VALUES" +
+          "("+ bookid + ",'"  +  rollno + "','" + issuedate + "','" +duedate + "')";
 
          System.out.println("SQL:"+sql);
 

@@ -12,7 +12,10 @@ public class MyTest{
         BookLoanDBService c = new BookLoanDBService();
         c.createBookLoanTable();
         BookLoanDBService c1 = new BookLoanDBService();
-        c1.insertBookLoan(125,003,21-2-19,25-2-19,26-2-19);
+        c1.insertBookLoan(12,04,"2019-02-21","2019-02-25");
+        c1.updateBookLoan set rollno=13,returndate="2019-06-25",fine=2 where bookid=14;
+        
+        
 	  
 
 	}

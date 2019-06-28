@@ -60,11 +60,11 @@
             <h1 style="text-align: center;font-size: 35px;font-family: lucida console;">Library Management System</h1><br>
 
             <div id="registration_success" style="text-align: center;font-size: 35px;font-family: lucida console; display: none;">
-                <h1 style="color: green">Registation done successfully. Please click here to login</h1><br>
-                <a href="./student.html">Login</a>
+                <h1 style="color: green">Book issued successfully</h1><br>
+                
             </div>
             <div id="registration_form">
-                <form name="admin_issue_book" id="admin_issue_book" action="admin_issue_book" method="">
+                <form name="bookloan" id="bookloan" action="bookloan" method="GET">
                     <h1 style="text-align: center;font-size: 25px;">Issue Book</h1><br>
                     <br><br>
                     <div >
@@ -73,7 +73,7 @@
                     <div class="login">
                         <center><input type="text" name="bookid" placeholder="Book Id" required=""><br><br></center>
                         <center><input type="text" name="studentrollno" placeholder="Student Roll No" required=""><br><br></center>
-                        <center><a href="./issuebook.html"><Button>Submit</Button></a></center>
+                        <center><Button>Submit</Button></center>
                     </div>
                 </form>
             </div>
