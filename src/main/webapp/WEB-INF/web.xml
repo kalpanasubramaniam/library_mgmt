@@ -76,7 +76,7 @@
   <servlet-mapping>
     <servlet-name>BookLoan</servlet-name>
     <url-pattern>/bookloan/*</url-pattern>
-  </servlet-mapping>  
+  </servlet-mapping>
 
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

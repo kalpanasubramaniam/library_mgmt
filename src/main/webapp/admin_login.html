@@ -1,11 +1,105 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html>
 <head>
-    <title>student login</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Library Management System</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+    <style>
+        .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        }
+
+        @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+        }
+        }
+        html,
+        body {
+        height: 100%;
+        }
+
+        body {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-align: center;
+        align-items: center;
+        padding-top: 40px;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+        }
+
+        .form-signin {
+        width: 100%;
+        max-width: 330px;
+        padding: 15px;
+        margin: auto;
+        }
+        .form-signin .checkbox {
+        font-weight: 400;
+        }
+        .form-signin .form-control {
+        position: relative;
+        box-sizing: border-box;
+        height: auto;
+        padding: 10px;
+        font-size: 16px;
+        }
+        .form-signin .form-control:focus {
+        z-index: 2;
+        }
+        .form-signin input[type="email"] {
+        margin-bottom: -1px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+        }
+        .form-signin input[type="password"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        }
+    </style>
+
+
+</head>
+
+
+<body>
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Admin Login <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Student Login</a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
     <script src="jquery.min.js"></script>
     <script type="text/javascript">
     	$(function() {
@@ -32,52 +126,29 @@
 	    });
 
 
-
     </script>
-</head>
-<!-- <body background="C:\Users\elcot\Downloads\alejandro-sotillet-1546832-unsplash.jpg"> -->
-<body>
-</body>
-<header style="height: 100px;">
-    <div class="logo">
-        <h1 style="color:white;font-size: 25px;word-spacing:10px;line-height: 50px;margin-top: 20px;">LIBRARY MANAGEMENT SYSTEM</h1>
-    </div>
-    <nav>
-        <ul>
-            <li><a href="index.html">HOME</a></li>
-            <li><a href="">FEEDBACK</a></li>
-        </ul>
-    </nav>
 
 </header>
-<section>
-    <div class="log_img">
-        <br><br><br>
-        <div class="box1">
-            <h1 style="text-align: center;font-size: 35px;font-family: lucida console;">Books</h1><br>
-            <h1 style="text-align: center;font-size: 25px;">Admin Login Form</h1><br>
-            <form name="adminlogin" id = "adminlogin" action="adminlogin" method="post">
-                <br><br>
 
-                <div id="login_failure" style="text-align: center;font-size: 15px;font-family: lucida console; display: none;">
-                    <h3 style="color: red">Invalid user name or passsord. Please reenter</h3><br>
-                </div>
-
-                <div class="login">
-                    <center><input type="text" name="username" placeholder="username" required=""><br><br></center>
-                    <center><input type="password" name="password" placeholder="password" required=""><br><br></center>
-                    <center><button>Login</button></center>
-            </form>
-            <p style="color: white;padding-left: 15px;">
-                <br><br>
-                <a style="color: white;" href="">Forgot password?</a>
-                New to this website?<a style="color: white" href="registration.html">Sign Up</a>
-            </p>
-        </div>
+<body class="text-center">
+<form class="form-signin" name="adminlogin1" id="adminlogin" action="adminlogin" method="post">
+    <div id="login_failure" class="alert alert-danger" style="display: none;" role="alert">
+        Invalid user name or passsord. Please reenter
     </div>
 
-    <footer>
-
-    </footer>
-</section>
+    <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    <label for="inputEmail" class="sr-only">User Name</label>
+    <input type="text" name="username" id="inputEmail" class="form-control" placeholder="User Name" required autofocus>
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+    <div class="checkbox mbw-3">
+        <label>
+            <input type="checkbox" value="remember-me"> Remember me
+        </label>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <p class="mt-5 mb-3 text-muted">&copy; 2019-2021</p>
+</form>
+</div>
 </html>

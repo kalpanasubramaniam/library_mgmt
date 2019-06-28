@@ -1,6 +1,7 @@
 package com.myproject.libmgmt;
 
 import com.myproject.libmgmt.db.StudentDBService;
+import com.myproject.libmgmt.model.Student;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -17,20 +18,20 @@ public class RegistrationServlet extends HttpServlet {
 
         System.out.println("Registration of the student");
 
-        String firstName = request.getParameter("firstname");
-        String lastName = request.getParameter("lastname");
-        String userName = request.getParameter("username");
-        int rollNo = Integer.parseInt(request.getParameter("rollno"));
-        String password = request.getParameter("password");
-        String emailId = request.getParameter("emailid");
-
-        System.out.println("FirstName:" + firstName);
-        System.out.println("LastName :" + lastName);
-
-        ResultSet rs = dbService.selectStudentByRollNo(rollNo);
-
         try {
-            if (rs == null || !rs.next()) {
+            String firstName = request.getParameter("firstname");
+            String lastName = request.getParameter("lastname");
+            String userName = request.getParameter("username");
+            int rollNo = Integer.parseInt(request.getParameter("rollno"));
+            String password = request.getParameter("password");
+            String emailId = request.getParameter("emailid");
+
+            System.out.println("FirstName:" + firstName);
+            System.out.println("LastName :" + lastName);
+
+            Student st = dbService.selectStudentByRollNo(rollNo);
+
+            if (st == null) {
                 System.out.println("Inserting student record");
                 dbService.insertStudent(firstName, lastName, rollNo, userName, password, emailId);
                 response.setStatus(HttpServletResponse.SC_OK);
@@ -42,7 +43,7 @@ public class RegistrationServlet extends HttpServlet {
                 response.setContentType("text/html");
                 response.getWriter().println("Student already exists");
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             response.setContentType("text/html");
             response.getWriter().println("Internal Server error");

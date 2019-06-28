@@ -1,86 +1,202 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>student Registration</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Library Management System</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <script src="jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+
+    <style>
+        .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        }
+
+        @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+        }
+        }
+    </style>
+
 
     <script src="jquery.min.js"></script>
     <script type="text/javascript">
     	$(function() {
-	    	$(".button").click(function(event) {
+	    	$("#search_book").submit(function(event) {
 			event.preventDefault();// Stop the browser from submitting the form.
-    		var form = $('#registration');
+    		var form = $('#search_book');
     		var formData = $(form).serialize();
-    		console.log("Registration Data",formData);
+
+    		var successMsg = $('#search_book_success');
+    		var failureMsg = $('#search_book_failure');
+
+    		$("#search_result_table > tbody").html("");
+
+
+            successMsg.hide();
+            failureMsg.hide();
+
+    		successMsg.text("");
+    		failureMsg.text("");
+
+    		console.log("Insertbook Data",formData);
 
     		$.ajax({
-  		  		type: 'POST',
+  		  		type: $(form).attr('method'),
     			url: '/'+ $(form).attr('action'),
     			data: formData,
 			}).done(function(response) {
 				console.log("success response:", response);
-				$("#registration_success").show();
-				$('#registration_form').toggle();
+				form.find("input[type=text], textarea").val("");
 
+				if(response.length === 0){
+				    failureMsg.text("No records found");
+				    failureMsg.show();
+				} else {
+				    successMsg.text("Records found:"+response.length);
+				    successMsg.show();
+
+				    $.each(response, function(i, d) {
+                       var row='<tr>';
+                       $.each(d, function(j, e) {
+                          row+='<td>'+e+'</td>';
+                       });
+                       row+='</tr>';
+                       $('#search_result_table tbody').append(row);
+                    });
+
+
+				}
+
+				<!--$("#search_book_success").show();-->
 			}).fail(function(data,err) {
 				console.log("failure data", data, err);
+				$("#search_book_failure").show();
 			});
 
 			});
 	    });
-
-</script>
+    </script>
 
 </head>
 
 
-<body background="C:\Users\elcot\Downloads\alejandro-sotillet-1546832-unsplash.jpg">
+<body class="bg-light">
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="./">HOME</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-</body>
-<header style="height: 100px;">
-    <div class="logo">
-        <h1 style="color:white;font-size: 25px;word-spacing:10px;line-height: 50px;margin-top: 20px;">LIBRARY MANAGEMENT SYSTEM</h1>
-    </div>
-    <nav>
-        <ul>
-            <li><a href="books.html">BOOKS</a></li>
-            <li><a href="registration.html">REGISTRATION</a></li>
-            <li><a href="">FEEDBACK</a></li>
-        </ul>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="admin_search_book.html">Book Search <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="admin_issue_book.html">Issue Book</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="admin_return_book.html">Return Book</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="admin_overdue_book.html">Overdue Books</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="admin_add_book.html">Add Book</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="admin_add_student.html">Add Student</a>
+                </li>
+
+            </ul>
+
+        </div>
     </nav>
 
 </header>
 
+<div class="container">
+    <br/>
+    <br/>
+    <div class="py-5 text-center">
+        <h2>Search Book</h2>
+        <p class="lead"></p>
+    </div>
 
-<section>
-    <div class="reg_img">
-        <div class="box2">
-            <h1 style="text-align: center;font-size: 35px;font-family: lucida console;">Library Management System</h1><br>
+    <div class="row">
+        <div class="col-lg-4 col-lg-offset-4">
+            <form id ="search_book" action="book" method="GET">
+                <div id="search_book_success" class="alert alert-success" style="display: none;" role="alert">
+                </div>
 
-            <div id="registration_success" style="text-align: center;font-size: 35px;font-family: lucida console; display: none;">
-                <h1 style="color: green">searchbook done successfully</h1>
-            </div>
-            <div id="registration_form">
-                <form name="admin_search_book" id="admin_search_book" action="admin_search_book" method="">
-                    <h1 style="text-align: center;font-size: 25px;">Search Book</h1><br>
-                    <br><br>
-                    <div >
+                <div id="search_book_failure" class="alert alert-danger" style="display: none;" role="alert">
+                </div>
 
-                    </div>
-                    <div class="login">
-                        <center><input type="text" name="bookid" placeholder="Book Id" required=""><br><br></center>
-                        <center><input type="text" name="bookname" placeholder="bookname" required=""><br><br></center>
-                        <center><a href="./searchbook.html"><Button>Submit</Button></a></center>
-                    </div>
-                </form>
-            </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">BookName</label>
+                    <input type="text" name="bookname" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                           placeholder="Enter book name">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Book Id</label>
+                    <input type="number" name="bookid" class="form-control" id="exampleInputPassword1" placeholder="Enter book id">
+                </div>
+                <div>
+                    <input type="hidden" name="searchbook" value="true" />
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
         </div>
     </div>
 
-    <footer>
 
-    </footer>
-</section>
+    <div id ="search_result">
+        <br/>
+        <br/>
+        <br/>
+        <div class="row">
+        <table id ="search_result_table" class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Book Id</th>
+                <th scope="col">BookName</th>
+                <th scope="col">Author</th>
+                <th scope="col">Dept</th>
+                <th scope="col">Title</th>
+                <th scope="col">Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+
 </html>

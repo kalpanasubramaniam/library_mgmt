@@ -12,6 +12,12 @@ public void init() {
     StudentDBService dbService = new StudentDBService();
     dbService.createStudeTable();
 
+    BookLoanDBService bookLoanDBService = new BookLoanDBService();
+    bookLoanDBService.createBookLoanTable();
+
+    BookDBService bookDBService = new BookDBService();
+    bookDBService.createBookTable();
+
     System.out.println( getServletName() + ": initialised" );
 
   }

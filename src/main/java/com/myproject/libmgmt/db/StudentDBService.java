@@ -1,10 +1,8 @@
 package com.myproject.libmgmt.db;
+import com.myproject.libmgmt.model.OverDueBook;
 import com.myproject.libmgmt.model.Student;
 
 import java.sql.*;
-
-// EXAMPLES:
-// https://www.tutorialspoint.com/sqlite/sqlite_java.htm
 
 public class StudentDBService {
 
@@ -41,13 +39,15 @@ public class StudentDBService {
 	}
 
 
-	public ResultSet selectStudentByRollNo(int rollNo){
+	public Student selectStudentByRollNo(int rollNo) throws Exception {
 
 	  Connection c = null;
       Statement stmt = null;
       ResultSet rs = null;
-      
-      try {
+
+        Student student = null;
+
+        try {
          Class.forName("org.sqlite.JDBC");
          c = DriverManager.getConnection("jdbc:sqlite:library_mgmt.db");
          System.out.println("Opened database successfully");
@@ -60,15 +60,26 @@ public class StudentDBService {
 
 
          rs  = stmt.executeQuery(sql);
-         stmt.close();
+
+            if (rs.next()) {
+              student = new Student(rs.getInt("ROLLNO"),
+                      rs.getString("FIRSTNAME"), rs.getString("LASTNAME"),
+                      rs.getString("USERNAME"), rs.getString("PASSWORD"),
+                      rs.getString("EMAIL"));
+          }
+
+
+          stmt.close();
          c.close();
       } catch ( Exception e ) {
       	 System.err.println("Error while selectStudentByRollNo");
          System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            e.printStackTrace();
+            throw e;
 
       }
 
-      return rs;
+      return student;
   }
 
     public Student selectStudentByUserName(String userName){

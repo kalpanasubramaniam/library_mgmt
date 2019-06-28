@@ -17,7 +17,7 @@ public class AdminLoginServlet extends HttpServlet {
             System.out.println("Admin UserName:" + userName);
             System.out.println("Admin Password:" + password);
 
-            if (userName.equalsIgnoreCase("admin") && password.equals("AngelAdmin123")) {
+            if (userName.equalsIgnoreCase("admin") && password.equals("admin123")) {
                 response.setStatus(HttpServletResponse.SC_OK);
                 response.setContentType("text/html");
                 response.getWriter().println("Login Successfull");

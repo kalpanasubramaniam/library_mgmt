@@ -36,13 +36,41 @@
         }
         }
     </style>
+
+
+    <script src="jquery.min.js"></script>
+    <script type="text/javascript">
+    	$(function() {
+	    	$("#insertbook").submit(function(event) {
+			event.preventDefault();// Stop the browser from submitting the form.
+    		var form = $('#insertbook');
+    		var formData = $(form).serialize();
+    		console.log("Insertbook Data",formData);
+
+    		$.ajax({
+  		  		type: 'POST',
+    			url: '/'+ $(form).attr('action'),
+    			data: formData,
+			}).done(function(response) {
+				console.log("success response:", response);
+				form.find("input[type=text], textarea").val("");
+				$("#insertbook_success").show();
+			}).fail(function(data,err) {
+				console.log("failure data", data, err);
+				$("#admin_return_book_failure").show();
+			});
+
+			});
+	    });
+    </script>
+
 </head>
 
 
 <body class="bg-light">
 <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="#">HOME</a>
+        <a class="navbar-brand" href="./">HOME</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -54,14 +82,14 @@
                 <li class="nav-item">
                     <a class="nav-link" href="admin_issue_book.html">Issue Book <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item ">
                     <a class="nav-link" href="admin_return_book.html">Return Book<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="admin_overdue_book.html">Overdue Books</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="admin_add_book.html">Add Book</a>
+                <li class="nav-item active">
+                    <a class="nav-link" href="admin_add_book.html">Add Book<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="admin_add_student.html">Add Student</a>
@@ -72,67 +100,55 @@
         </div>
     </nav>
 
-    <script src="jquery.min.js"></script>
-    <script type="text/javascript">
-    	$(function() {
-            var form = $('#admin_return_book');
-	    	$(form).submit(function(event) {
-			event.preventDefault();// Stop the browser from submitting the form.
-    		var formData = $(form).serialize();
-    		console.log("Return Book Data",formData);
-    	    $("#admin_return_book_success").hide();
-    	    $("#admin_return_book_failure").hide();
-    	    $("#admin_return_book_success").text("");
-    		$.ajax({
-  		  		type:  $(form).attr('method'),
-    			url: '/'+ $(form).attr('action'),
-    			data: formData,
-			}).done(function(response) {
-				console.log("success response:", response);
-				form.find("input[type=text], textarea").val("");
-				$("#admin_return_book_success").show();
-				$("#admin_return_book_success").text(response);
-
-			}).fail(function(data,err) {
-				console.log("failure data", data, err);
-				form.find("input[type=text], textarea").val("");
-				$("#admin_return_book_failure").show();
-
-			});
-			});
-	    });
-</script>
 </header>
 
 
 <div class="container">
+    </br>
+    </br>
     <div class="py-5 text-center">
-        <img class="d-block mx-auto mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72"
-             height="72">
-        <h2>Return Book</h2>
+        <h2>Add Book</h2>
         <p class="lead"></p>
     </div>
 
     <div class="row">
         <div class="col-lg-4 col-lg-offset-4">
-            <form id="admin_return_book" action="bookloan" method="PUT">
-                <div id="admin_return_book_success" class="alert alert-success" style="display: none;" role="alert">
-                    Book returned successfully
+            <form id="insertbook" action="book" method="POST">
+                <div id="insertbook_success" class="alert alert-success" style="display: none;" role="alert">
+                    Book addd successfully
                 </div>
 
                 <div id="admin_return_book_failure" class="alert alert-danger" style="display: none;" role="alert">
-                    Failed to return book
+                    Failed to add book
+                </div>
+
+
+                <div class="form-group">
+                    <label>Book Id</label>
+                    <input type="number" class="form-control" name="bookid" placeholder="Book Id" required="true">
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Book Id</label>
-                    <input type="number" name="bookid" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                           placeholder="Enter book id">
+                    <label>Author Name</label>
+                    <input type="text" class="form-control" name="authorname" placeholder="Author Name" required="true">
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Roll Number</label>
-                    <input type="number"  name="rollno" class="form-control" id="exampleInputPassword1" placeholder="Enter roll number">
+                    <label>Price</label>
+                    <input type="number" class="form-control" name="price" placeholder="Book Price" required="true">
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="form-group">
+                    <label>Book Name</label>
+                    <input type="text" class="form-control" name="bookname" placeholder="Book Name" required="true">
+                </div>
+                <div class="form-group">
+                    <label>Department</label>
+                    <input type="text" class="form-control" name="department" placeholder="Department" required="true">
+                </div>
+                <div class="form-group">
+                    <label>Book Title</label>
+                    <input type="text" class="form-control" name="booktitle" placeholder="Book Title" required="true">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Add Book</button>
             </form>
         </div>
     </div>
@@ -141,4 +157,6 @@
 </body>
 
 </html>
+
+
 
